@@ -2,20 +2,13 @@ FROM ubuntu:17.04
 
 # Install prerequisites
 RUN apt-get update
-RUN apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    software-properties-common
+RUN apt-get install -y software-properties-common
 
 # Install Docker Client
-RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-RUN add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
-RUN apt-get update
-RUN apt-get install docker-ce
+ENV DOCKER_VERSION="17.03.0-ce"
+ENV curl -L -o /tmp/docker-$DOCKER_VERSION.tgz https://get.docker.com/builds/Linux/x86_64/docker-$DOCKER_VERSION.tgz
+ENV tar -xz -C /tmp -f /tmp/docker-$DOCKER_VERSION.tgz
+ENV mv /tmp/docker/* /usr/bin
 
 # Install java8
 RUN add-apt-repository -y ppa:webupd8team/java
