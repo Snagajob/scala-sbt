@@ -2,7 +2,7 @@ FROM ubuntu:17.04
 
 # Install prerequisites
 RUN apt-get update
-RUN apt-get install -y software-properties-common curl build-essential
+RUN apt-get install -y software-properties-common curl build-essential unzip
 
 # Install Docker Client
 ENV DOCKER_VERSION="17.03.0-ce"
