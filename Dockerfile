@@ -2,7 +2,7 @@ FROM ubuntu:17.10
 
 # Install prerequisites
 RUN apt-get update
-RUN apt-get install -y software-properties-common curl build-essential unzip
+RUN apt-get install -y software-properties-common curl build-essential
 
 # Install Docker Client
 ENV DOCKER_VERSION="17.03.0-ce"
@@ -10,9 +10,11 @@ RUN curl -L -o /tmp/docker-$DOCKER_VERSION.tgz https://get.docker.com/builds/Lin
 RUN tar -xz -C /tmp -f /tmp/docker-$DOCKER_VERSION.tgz
 RUN mv /tmp/docker/* /usr/bin
 
+# Install unzip
+RUN apt-get install -y unzip
+
 # Install java8
 RUN add-apt-repository -y ppa:webupd8team/java
-RUN apt-get update
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 RUN apt-get install -y oracle-java8-installer
 
@@ -39,4 +41,3 @@ RUN \
   sbt sbtVersion
 
 WORKDIR /root
-
