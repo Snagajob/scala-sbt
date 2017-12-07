@@ -41,4 +41,7 @@ RUN \
   apt-get install sbt && \
   sbt sbtVersion
 
+# Install git
+RUN apt-get install -y git
+
 WORKDIR /root
